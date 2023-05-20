@@ -3,24 +3,13 @@ import { useParams } from "react-router-dom";
 
 import "../index.css";
 import ShimmerUIComponent from "./ShimmerUIComponenet";
-import { LOGO_URL } from "../utils/Constants";
+import { LOGO_URL } from "../utils/constants";
+import useRestrauant from "../utils/hooks/useRestrauant";
 
 const RestaurentDetails = () => {
   const { id } = useParams();
-  const [restaurant, setRestaurant] = useState(null);
 
-  useEffect(() => {
-    getRestaurantDetails();
-  }, []);
-
-  async function getRestaurantDetails() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.73316393493694&lng=83.32670856267212&restaurantId=" +
-        id
-    );
-    const json = await data?.json();
-    setRestaurant(json?.data);
-  }
+  const restaurant = useRestrauant(id);
 
   return !restaurant ? (
     <ShimmerUIComponent />
@@ -35,6 +24,7 @@ const RestaurentDetails = () => {
         <h4>{restaurant?.cards[0]?.card?.card?.info?.cuisines?.join(", ")}</h4>
       </div>
       <div className="restaurant-menu">
+        <h1>Menu</h1>
         {restaurant?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map(
           (card) => {
             return <li key={card?.card?.info?.id}>{card?.card?.info?.name}</li>;

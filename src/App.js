@@ -1,7 +1,7 @@
 /**
  * created by surendra yalakala
  */
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
@@ -9,10 +9,15 @@ import "./index.css";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import AboutUS from "./components/AboutUS";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
 import RestaurentDetails from "./components/RestaurentDetails";
+import Profile from "./components/Profile";
+import ShimmerUIComponent from "./components/ShimmerUIComponenet";
+
+// Upon demand loading => upon render => suspend loading
+const InstaMart = lazy(() => import("./components/InstaMart"));
+const AboutUS = lazy(() => import("./components/AboutUS"));
 
 const AppLayout = () => {
   return (
@@ -36,7 +41,17 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/aboutus",
-        element: <AboutUS />,
+        element: (
+          <Suspense fallback={<ShimmerUIComponent />}>
+            <AboutUS />
+          </Suspense>
+        ),
+        children: [
+          {
+            path: "profile", // parentpath/{path} => localhost/about/profile
+            element: <Profile />,
+          },
+        ],
       },
       {
         path: "/contact",
@@ -45,6 +60,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <RestaurentDetails />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<ShimmerUIComponent />}>
+            <InstaMart />
+          </Suspense>
+        ),
       },
     ],
   },

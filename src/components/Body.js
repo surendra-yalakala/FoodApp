@@ -7,21 +7,16 @@ import { Link } from "react-router-dom";
 import restaurentList from "../utils/mocData";
 import RestaurantCard from "./RestaurantCard";
 import ShimmerUIComponent from "./ShimmerUIComponenet";
+import { getFilteredData } from "../utils/Helper";
+import useOnline from "../utils/hooks/useOnline";
+import useRestaurantList from "../utils/hooks/useRestaurantList";
 
 const Body = () => {
-  const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  const isOnline = useOnline();
+  const listOfRestaurant = useRestaurantList();
 
-  useEffect(() => {
-    getRestaurants();
-  }, []);
-
-  async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    console.log(json);
-    setListOfRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+  if (!isOnline) {
+    return <h1>**** No internet please check *****</h1>;
   }
 
   return listOfRestaurant?.length === 0 ? (
@@ -32,11 +27,7 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            const listOfRestaurant = restaurentList.filter(
-              (restaurant) => restaurant.data.avgRating > 4
-            );
-
-            setListOfRestaurant(listOfRestaurant);
+            setListOfRestaurant(getFilteredData(restaurentList));
           }}
         >
           Top Rated Restaurants

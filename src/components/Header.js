@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../index.css";
-import { LOGO_URL } from "../utils/Constants";
+import { LOGO_URL } from "../utils/constants";
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,6 +29,9 @@ const Header = () => {
           </Link>
           <Link to="/contact">
             <li>Contact US</li>
+          </Link>
+          <Link to="/instamart">
+            <li>InstaMart</li>
           </Link>
           <li>Cart</li>
         </ul>
