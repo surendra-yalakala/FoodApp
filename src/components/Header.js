@@ -3,6 +3,8 @@
  */
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import "../index.css";
 import { LOGO_URL } from "../utils/Constants";
 
@@ -19,9 +21,15 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About us</li>
-          <li>Contact US</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <Link to="/aboutus">
+            <li>About us</li>
+          </Link>
+          <Link to="/contact">
+            <li>Contact US</li>
+          </Link>
           <li>Cart</li>
         </ul>
       </div>

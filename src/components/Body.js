@@ -2,6 +2,7 @@
  * created by surendra yalakala
  */
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import restaurentList from "../utils/mocData";
 import RestaurantCard from "./RestaurantCard";
@@ -44,7 +45,12 @@ const Body = () => {
       <div className="res-container">
         {listOfRestaurant?.map((restaurant) => {
           return (
-            <RestaurantCard key={restaurant.data.id} resData={restaurant} />
+            <Link
+              key={restaurant?.data?.id}
+              to={"/restaurant/" + restaurant?.data?.id}
+            >
+              <RestaurantCard resData={restaurant} />
+            </Link>
           );
         })}
       </div>
