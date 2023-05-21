@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import "../index.css";
 import ShimmerUIComponent from "./ShimmerUIComponenet";
 import { LOGO_URL } from "../utils/constants";
 import useRestrauant from "../utils/hooks/useRestrauant";

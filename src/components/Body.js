@@ -22,10 +22,10 @@ const Body = () => {
   return listOfRestaurant?.length === 0 ? (
     <ShimmerUIComponent />
   ) : (
-    <div className="body">
-      <div className="filter">
+    <div className="flex-col">
+      <div className="bg-white">
         <button
-          className="filter-btn"
+          className="bg-orange-200 p-2 m-2 rounded-sm text-xs"
           onClick={() => {
             setListOfRestaurant(getFilteredData(restaurentList));
           }}
@@ -33,7 +33,7 @@ const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {listOfRestaurant?.map((restaurant) => {
           return (
             <Link

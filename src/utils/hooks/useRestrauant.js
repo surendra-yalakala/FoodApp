@@ -5,11 +5,11 @@ const useRestrauant = (resId) => {
   const [restaurant, setRestaurant] = useState(null);
 
   useEffect(() => {
-    getRestaurantDetails();
+    getRestaurantDetails(resId);
   }, []);
 
   async function getRestaurantDetails() {
-    const data = await fetch(FETCH_MENU_URL + id);
+    const data = await fetch(FETCH_MENU_URL + resId);
     const json = await data?.json();
     setRestaurant(json?.data);
   }

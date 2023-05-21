@@ -5,7 +5,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "../index.css";
 import { LOGO_URL } from "../utils/constants";
 
 const Header = () => {
@@ -15,25 +14,25 @@ const Header = () => {
   };
 
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+    <div className="flex justify-between bg-blue-200">
+      <div>
+        <img className="h-28 p-2" src={LOGO_URL} />
       </div>
-      <div className="nav-items">
-        <ul>
-          <li>
+      <div className="pl-10">
+        <ul className="flex pl-10">
+          <li className="px-2">
             <Link to="/">Home</Link>
           </li>
           <Link to="/aboutus">
-            <li>About us</li>
+            <li className="px-2">About us</li>
           </Link>
           <Link to="/contact">
-            <li>Contact US</li>
+            <li className="px-2">Contact US</li>
           </Link>
           <Link to="/instamart">
-            <li>InstaMart</li>
+            <li className="px-2">InstaMart</li>
           </Link>
-          <li>Cart</li>
+          <li className="px-2">Cart</li>
         </ul>
       </div>
       {loggedIn ? (
