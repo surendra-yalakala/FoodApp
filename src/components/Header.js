@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 import { LOGO_URL } from "../utils/constants";
 import UserContext from "../utils/context/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -15,6 +16,7 @@ const Header = () => {
   };
 
   const { user } = useContext(UserContext);
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <div className="flex justify-between bg-blue-200">
@@ -35,7 +37,9 @@ const Header = () => {
           <Link to="/instamart">
             <li className="px-2">InstaMart</li>
           </Link>
-          <li className="px-2">Cart</li>
+          <Link to="/cart">
+            <li className="px-2">Cart - {cartItems?.length} items</li>
+          </Link>
         </ul>
       </div>
       <p className="p-2 font-bold">{user?.name}</p>

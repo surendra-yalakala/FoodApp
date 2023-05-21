@@ -4,6 +4,7 @@
 import React, { Suspense, lazy, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -14,6 +15,8 @@ import RestaurentDetails from "./components/RestaurentDetails";
 import Profile from "./components/Profile";
 import ShimmerUIComponent from "./components/ShimmerUIComponenet";
 import UserContext from "./utils/context/UserContext";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 // Upon demand loading => upon render => suspend loading
 const InstaMart = lazy(() => import("./components/InstaMart"));
@@ -25,18 +28,20 @@ const AppLayout = () => {
     email: "surendrayalakala@gmail.com",
   });
   return (
-    <UserContext.Provider
-      value={{
-        user,
-        setUser: setUser,
-      }}
-    >
-      <div className="app">
-        <Header />
-        <Outlet />
-        <Footer />
-      </div>
-    </UserContext.Provider>
+    <Provider store={store}>
+      <UserContext.Provider
+        value={{
+          user,
+          setUser: setUser,
+        }}
+      >
+        <div className="app">
+          <Header />
+          <Outlet />
+          <Footer />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -79,6 +84,10 @@ const appRouter = createBrowserRouter([
             <InstaMart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
