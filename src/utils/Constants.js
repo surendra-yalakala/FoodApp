@@ -10,3 +10,9 @@ export const FETCH_MENU_URL =
 
 export const FETCH_RESTAURANT_URL =
   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&page_type=DESKTOP_WEB_LISTING";
+
+export const INSTA_MART_TITLES = {
+  about: "About InstaMart",
+  team: "Team InstaMart",
+  career: "Careers at InstaMart",
+};

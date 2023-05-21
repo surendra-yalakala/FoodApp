@@ -1,10 +1,10 @@
 const ShimmerUIComponent = () => {
   return (
-    <div className="restaurant-list">
-      {Array(10)
+    <div className="flex flex-wrap">
+      {Array(15)
         .fill("")
         .map((e, index) => (
-          <div key={index} className="shimmer-card"></div>
+          <div key={index} className="bg-gray-200 w-52 m-2 h-72"></div>
         ))}
     </div>
   );

@@ -2,16 +2,19 @@
  * created by surendra yalakala
  */
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { LOGO_URL } from "../utils/constants";
+import UserContext from "../utils/context/UserContext";
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const AuthenticateUser = () => {
     setLoggedIn(!loggedIn);
   };
+
+  const { user } = useContext(UserContext);
 
   return (
     <div className="flex justify-between bg-blue-200">
@@ -35,6 +38,7 @@ const Header = () => {
           <li className="px-2">Cart</li>
         </ul>
       </div>
+      <p className="p-2 font-bold">{user?.name}</p>
       {loggedIn ? (
         <button onClick={() => AuthenticateUser()}>Logout</button>
       ) : (

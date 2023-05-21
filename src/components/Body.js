@@ -1,7 +1,7 @@
 /**
  * created by surendra yalakala
  */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import restaurentList from "../utils/mocData";
@@ -10,10 +10,13 @@ import ShimmerUIComponent from "./ShimmerUIComponenet";
 import { getFilteredData } from "../utils/Helper";
 import useOnline from "../utils/hooks/useOnline";
 import useRestaurantList from "../utils/hooks/useRestaurantList";
+import UserContext from "../utils/context/UserContext";
 
 const Body = () => {
   const isOnline = useOnline();
   const listOfRestaurant = useRestaurantList();
+
+  const { user, setUser } = useContext(UserContext);
 
   if (!isOnline) {
     return <h1>**** No internet please check *****</h1>;
@@ -32,6 +35,27 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
+        <input
+          className="m-2 border border-slate-400 font-sans text-sm"
+          value={user?.name}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              name: e?.target?.value,
+            })
+          }
+        />
+        {/* <input
+          className="m-2 border border-slate-400 font-sans text-sm"
+          value={user?.email}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              email: e?.value,
+            })
+          }
+        /> */}
+        <input />
       </div>
       <div className="flex flex-wrap">
         {listOfRestaurant?.map((restaurant) => {

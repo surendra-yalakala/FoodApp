@@ -1,7 +1,7 @@
 /**
  * created by surendra yalakala
  */
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
@@ -13,18 +13,30 @@ import Contact from "./components/Contact";
 import RestaurentDetails from "./components/RestaurentDetails";
 import Profile from "./components/Profile";
 import ShimmerUIComponent from "./components/ShimmerUIComponenet";
+import UserContext from "./utils/context/UserContext";
 
 // Upon demand loading => upon render => suspend loading
 const InstaMart = lazy(() => import("./components/InstaMart"));
 const AboutUS = lazy(() => import("./components/AboutUS"));
 
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Surendra Yalakala",
+    email: "surendrayalakala@gmail.com",
+  });
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser: setUser,
+      }}
+    >
+      <div className="app">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+    </UserContext.Provider>
   );
 };
 
