@@ -23,7 +23,7 @@ const Body = () => {
   }
 
   return listOfRestaurant?.length === 0 ? (
-    <ShimmerUIComponent />
+    <ShimmerUIComponent data-testid="shimmer" />
   ) : (
     <div className="flex-col">
       <div className="bg-white">

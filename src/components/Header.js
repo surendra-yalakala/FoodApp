@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div className="flex justify-between bg-blue-200">
       <div>
-        <img className="h-28 p-2" src={LOGO_URL} />
+        <img data-testid="logo" className="h-28 p-2" src={LOGO_URL} />
       </div>
       <div className="pl-10">
         <ul className="flex pl-10">
@@ -38,7 +38,9 @@ const Header = () => {
             <li className="px-2">InstaMart</li>
           </Link>
           <Link to="/cart">
-            <li className="px-2">Cart - {cartItems?.length} items</li>
+            <li className="px-2" data-testid="cart">
+              Cart - {cartItems?.length} items
+            </li>
           </Link>
         </ul>
       </div>
